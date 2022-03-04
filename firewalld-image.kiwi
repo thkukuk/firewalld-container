@@ -39,7 +39,7 @@
     </type>
     <version>1.0.0</version>
     <packagemanager>zypper</packagemanager>
-    <rpm-excludedocs>true</rpm-excludedocs>
+    <rpm-excludedocs>false</rpm-excludedocs>
   </preferences>
   <repository>
     <source path="obsrepositories:/"/>
