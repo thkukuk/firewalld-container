@@ -9,7 +9,7 @@ The firewalld container needs access to the host's running system dbus, to the h
 To start the container:
                           
 ```
-podman run -d -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket --network host --privileged --name firewalld firewalld
+podman run -d -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket --network host --privileged --name firewalld registry.opensuse.org/home/kukuk/container/firewalld:latest
 ```
 
 ## Persistent configuration files
@@ -17,7 +17,7 @@ podman run -d -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket --netwo
 By default changes to the default firewalld configuration are lost with a restart of the container, but the config files can be saved in a volume in `/etc/firewalld`:
 
 ```
-podman run -d -v /etc/firewalld:/etc/firewalld -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket --network host --privileged --name firewalld firewalld
+podman run -d -v /etc/firewalld:/etc/firewalld -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket --network host --privileged --name firewalld registry.opensuse.org/home/kukuk/container/firewalld:latest
 ```
 
 ## Manage firewalld instance
