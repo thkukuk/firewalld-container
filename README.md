@@ -1,6 +1,6 @@
 # Firewalld Container Image
 
-Firewall daemon (firewalld) container image
+Firewall daemon (firewalld) container image with nftables as backend
 
 ## Run a firewalld instance
 
