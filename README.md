@@ -8,7 +8,7 @@ The firewalld container needs access to the host's running system dbus, to the h
 
 To start the container:
                           
-```sh
+```
 podman run -d -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket --network host --privileged --name firewalld firewalld
 ```
 
@@ -17,7 +17,7 @@ podman run -d -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket --netwo
 The firewalld instance should be managed with the CLI via `podman exec`
 after the container has been started:
 
-```sh
+```
 podman exec firewalld firewall-cmd ...
 ```
 
