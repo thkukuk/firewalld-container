@@ -31,7 +31,7 @@ stop_daemons() {
 
 start_daemons() {
     mkdir /run/dbus
-    dbus-broker --system --fork
+    dbus-daemon --system --fork
     "$@"
 }
 
