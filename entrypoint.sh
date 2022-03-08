@@ -1,4 +1,4 @@
-#!/bin/sh -eux
+#!/bin/sh -eu
 
 DEBUG=${DEBUG:-"0"}
 FIREWALLD_ARGS=""
@@ -9,8 +9,6 @@ if [ "${DEBUG}" = "1" ]; then
 fi
 
 export PATH=/usr/sbin:/sbin:${PATH}
-
-echo "Arguments $@"
 
 terminate() {
     base=$(basename "$1")
@@ -31,7 +29,7 @@ init_trap() {
 }
 
 stop_daemons() {
-    terminate /usr/bin/dbus-broker
+    terminate /usr/bin/dbus-daemon
     terminate /usr/sbin/firewalld
 }
 
