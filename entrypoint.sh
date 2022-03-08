@@ -1,10 +1,12 @@
-#!/bin/sh
+#!/bin/sh -eux
 
 DEBUG=${DEBUG:-"0"}
 
 [ "${DEBUG}" = "1" ] && set -x
 
 export PATH=/usr/sbin:/sbin:${PATH}
+
+echo "Arguments $@"
 
 terminate() {
     base=$(basename "$1")
@@ -30,9 +32,9 @@ stop_daemons() {
 }
 
 start_daemons() {
-    mkdir /run/dbus
-    dbus-daemon --system --fork
-    "$@"
+    mkdir -p /run/dbus
+    /usr/bin/dbus-daemon --system --fork
+    /usr/sbin/firewalld --nofork
 }
 
 #
@@ -43,8 +45,6 @@ init_trap
 
 if [ "$1" = 'firewalld' ]; then
     start_daemons "$@"
-    echo "firewalld running and ready"
-    /usr/bin/pause
 else
     exec "$@"
 fi
