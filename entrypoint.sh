@@ -1,8 +1,12 @@
 #!/bin/sh -eux
 
 DEBUG=${DEBUG:-"0"}
+FIREWALLD_ARGS=""
 
-[ "${DEBUG}" = "1" ] && set -x
+if [ "${DEBUG}" = "1" ]; then
+    set -x
+    FIREWALLD_ARGS="$FIREWALLD_ARGS --debug"
+fi
 
 export PATH=/usr/sbin:/sbin:${PATH}
 
@@ -34,7 +38,7 @@ stop_daemons() {
 start_daemons() {
     mkdir -p /run/dbus
     /usr/bin/dbus-daemon --system --fork
-    /usr/sbin/firewalld --nofork
+    /usr/sbin/firewalld --nofork $FIREWALLD_ARGS
 }
 
 #

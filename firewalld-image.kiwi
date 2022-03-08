@@ -17,6 +17,7 @@
         tag="latest"
         additionaltags="%PKG_VERSION%,%PKG_VERSION%-%RELEASE%"
         maintainer="Thorsten Kukuk &lt;kukuk@suse.com&gt;">
+	<entrypoint execute="/entrypoint.sh"/>
 	<subcommand execute="firewalld">
           <argument name="--nofork"/>
 	  <argument name="--nopid"/>
