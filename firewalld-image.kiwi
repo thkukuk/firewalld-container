@@ -43,6 +43,7 @@
     <source path="obsrepositories:/"/>
   </repository>
   <packages type="bootstrap">
+    <package name="catatonit"/>
     <package name="firewalld"/>
     <package name="-busybox-diffutils"/>
   </packages>
