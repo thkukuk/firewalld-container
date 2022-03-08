@@ -17,7 +17,10 @@
         tag="latest"
         additionaltags="%PKG_VERSION%,%PKG_VERSION%-%RELEASE%"
         maintainer="Thorsten Kukuk &lt;kukuk@suse.com&gt;">
-	<entrypoint execute="/entrypoint.sh"/>
+	<entrypoint execute="catatonit">
+	  <argument name="--"/>
+	  <argument name="/entrypoint.sh"/>
+	</entrypoint>
 	<subcommand execute="firewalld"/>
         <labels>
           <suse_label_helper:add_prefix prefix="de.thkukuk.firewalld">

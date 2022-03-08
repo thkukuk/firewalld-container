@@ -36,7 +36,7 @@ stop_daemons() {
 start_daemons() {
     mkdir -p /run/dbus
     /usr/bin/dbus-daemon --system --fork
-    exec catatonit -- /usr/sbin/firewalld --nofork $FIREWALLD_ARGS
+    /usr/sbin/firewalld --nofork $FIREWALLD_ARGS
 }
 
 #
