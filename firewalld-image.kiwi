@@ -47,6 +47,8 @@
   <packages type="bootstrap">
     <package name="bash"/>
     <package name="firewalld"/>
+    <package name="mandoc"/>
+    <package name="-busybox-man"/>
     <package name="-busybox-diffutils"/>
   </packages>
 </image>
