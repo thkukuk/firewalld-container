@@ -45,6 +45,11 @@ start_daemons() {
 
 init_trap
 
+# if command starts with an option, prepend firewalld
+if [ "${1:0:1}" = '-' ]; then
+        set -- firewalld --nofork "$@"
+fi
+
 if [ $(basename "$1") = 'firewalld' ]; then
     start_daemons "$@"
     wait -n
