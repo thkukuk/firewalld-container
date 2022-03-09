@@ -10,49 +10,28 @@ fi
 
 export PATH=/usr/sbin:/sbin:${PATH}
 
-terminate() {
-    base=$(basename "$1")
-    pid=$(/bin/pidof "$base")
-
-    if [ -n "$pid" ]; then
-	echo "Terminating $base..."
-	if ! kill "$pid" ; then
-	    echo "Terminating $base failed!"
-	fi
-    else
-	echo "Failure determining PID of $base"
-    fi
-}
-
-init_trap() {
-    trap stop_daemons TERM INT
-}
-
-stop_daemons() {
-    terminate /usr/bin/dbus-daemon
-    terminate /usr/sbin/firewalld
-}
-
-start_daemons() {
+start_dbus() {
     mkdir -p /run/dbus
     /usr/bin/dbus-daemon --system --fork
-    "$@" $FIREWALLD_ARGS &
 }
 
 #
 # Main
 #
 
-init_trap
-
 # if command starts with an option, prepend firewalld
 if [ "${1:0:1}" = '-' ]; then
-        set -- firewalld --nofork "$@"
+     set -- firewalld --nofork "$@"
+fi
+
+# If no firewalld config is provided, use default one
+if [ ! "$(ls -A /tmp)" ]; then
+    cp -av /usr/share/factory/etc/firewalld/* /etc/firewalld/
 fi
 
 if [ $(basename "$1") = 'firewalld' ]; then
-    start_daemons "$@"
-    wait -n
-else
-    exec "$@"
+    start_dbus
+    set -- "$@" $FIREWALLD_ARGS
 fi
+
+exec "$@"

@@ -37,3 +37,8 @@ The manual page for firewalld can be read with:
 ```
 # podman run -it --rm registry.opensuse.org/home/kukuk/container/firewalld:latest man firewalld
 ```
+
+## Reporting bugs
+
+Please report bugs as [github issue](https://github.com/thkukuk/firewalld-container/issues)
+

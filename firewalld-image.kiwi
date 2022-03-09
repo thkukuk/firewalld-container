@@ -31,6 +31,7 @@
 			  a dynamic customizable firewall with a D-Bus interface."/>
             <label name="org.opencontainers.image.version" value="%PKG_VERSION%-%RELEASE%"/>
             <label name="org.opencontainers.image.created" value="%BUILDTIME%"/>
+	    <label name="org.opencontainers.image.url" value="https://github.com/thkukuk/firewalld-container"/>
             <label name="org.openbuildservice.disturl" value="%DISTURL%"/>
           </suse_label_helper:add_prefix>
         </labels>
