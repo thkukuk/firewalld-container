@@ -36,7 +36,7 @@ stop_daemons() {
 start_daemons() {
     mkdir -p /run/dbus
     /usr/bin/dbus-daemon --system --fork
-    /usr/sbin/firewalld --nofork $FIREWALLD_ARGS &
+    "$@" $FIREWALLD_ARGS &
 }
 
 #
@@ -45,7 +45,7 @@ start_daemons() {
 
 init_trap
 
-if [ "$1" = 'firewalld' ]; then
+if [ $(basename "$1") = 'firewalld' ]; then
     start_daemons "$@"
     wait -n
 else
