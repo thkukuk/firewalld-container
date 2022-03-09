@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/bash -eu
 
 DEBUG=${DEBUG:-"0"}
 FIREWALLD_ARGS=""
@@ -16,7 +16,7 @@ terminate() {
 
     if [ -n "$pid" ]; then
 	echo "Terminating $base..."
-	if kill "$pid" ; then
+	if ! kill "$pid" ; then
 	    echo "Terminating $base failed!"
 	fi
     else
@@ -36,7 +36,7 @@ stop_daemons() {
 start_daemons() {
     mkdir -p /run/dbus
     /usr/bin/dbus-daemon --system --fork
-    /usr/sbin/firewalld --nofork $FIREWALLD_ARGS
+    /usr/sbin/firewalld --nofork $FIREWALLD_ARGS &
 }
 
 #
@@ -47,6 +47,7 @@ init_trap
 
 if [ "$1" = 'firewalld' ]; then
     start_daemons "$@"
+    wait -n
 else
     exec "$@"
 fi

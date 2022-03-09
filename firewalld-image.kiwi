@@ -17,11 +17,10 @@
         tag="latest"
         additionaltags="%PKG_VERSION%,%PKG_VERSION%-%RELEASE%"
         maintainer="Thorsten Kukuk &lt;kukuk@suse.com&gt;">
-	<entrypoint execute="catatonit">
-	  <argument name="--"/>
-	  <argument name="/entrypoint.sh"/>
-	</entrypoint>
-	<subcommand execute="firewalld"/>
+	<entrypoint execute="/entrypoint.sh"/>
+	<subcommand execute="firewalld">
+          <argument name="--nofork"/>
+        </subcommand>
         <labels>
           <suse_label_helper:add_prefix prefix="de.thkukuk.firewalld">
             <label name="org.opencontainers.image.title"
@@ -46,7 +45,7 @@
     <source path="obsrepositories:/"/>
   </repository>
   <packages type="bootstrap">
-    <package name="catatonit"/>
+    <package name="bash"/>
     <package name="firewalld"/>
     <package name="-busybox-diffutils"/>
   </packages>
