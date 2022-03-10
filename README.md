@@ -32,10 +32,16 @@ after the container has been started:
 
 ## firewalld documentation
 
-The manual page for firewalld can be read with:
+The manual page for `firewalld` can be read with:
 
 ```
 # podman run -it --rm registry.opensuse.org/home/kukuk/container/firewalld:latest man firewalld
+```
+
+or for the `firewall-cmd` client:
+
+```
+# podman run -it --rm registry.opensuse.org/home/kukuk/container/firewalld:latest man firewall-cmd
 ```
 
 ## Building containers
