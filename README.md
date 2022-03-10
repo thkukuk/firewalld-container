@@ -21,6 +21,12 @@ By default changes to the default firewalld configuration are lost with a restar
 # podman run -d --rm -v /etc/firewalld:/etc/firewalld --network host --privileged --name firewalld registry.opensuse.org/home/kukuk/container/firewalld:latest
 ```
 
+### Environment variables:
+```
+  DEBUG=[0|1]    Enable debug mode.
+  NODBUS=[0|1]   Don't start own dbus daemon. Requires that a dbus socket is provided.
+```
+
 ## Manage firewalld instance
 
 The firewalld instance should be managed with the CLI via `podman exec`

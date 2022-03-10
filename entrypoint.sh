@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 
 DEBUG=${DEBUG:-"0"}
+NODBUS=${NODBUS:-"0"}
 FIREWALLD_ARGS=""
 
 if [ "${DEBUG}" = "1" ]; then
@@ -11,8 +12,10 @@ fi
 export PATH=/usr/sbin:/sbin:${PATH}
 
 start_dbus() {
-    mkdir -p /run/dbus
-    /usr/bin/dbus-daemon --system --fork
+    if [ "${NODBUS}" = "0" ]; then
+        mkdir -p /run/dbus
+        /usr/bin/dbus-daemon --system --fork
+    fi
 }
 
 #
@@ -31,6 +34,7 @@ fi
 
 if [ $(basename "$1") = 'firewalld' ]; then
     start_dbus
+    # shellcheck disable=SC2086
     set -- "$@" $FIREWALLD_ARGS
 fi
 
