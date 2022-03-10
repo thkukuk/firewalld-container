@@ -18,7 +18,7 @@ To start the container:
 By default changes to the default firewalld configuration are lost with a restart of the container, but the config files can be saved in a volume in `/etc/firewalld`:
 
 ```
-# podman run -d --rm -v /etc/firewalld:/etc/firewalld -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket --network host --privileged --name firewalld registry.opensuse.org/home/kukuk/container/firewalld:latest
+# podman run -d --rm -v /etc/firewalld:/etc/firewalld --network host --privileged --name firewalld registry.opensuse.org/home/kukuk/container/firewalld:latest
 ```
 
 ## Manage firewalld instance
