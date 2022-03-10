@@ -38,6 +38,13 @@ The manual page for firewalld can be read with:
 # podman run -it --rm registry.opensuse.org/home/kukuk/container/firewalld:latest man firewalld
 ```
 
+## Building containers
+
+There are two ways to build a firewalld container:
+
+* [firewalld-image.kiwi](firewalld-image.kiwi) is a template for [kiwi](https://github.com/OSInside/kiwi) using the openSUSE busybox container as base container.
+* [Dockerfile](Dockerfile) is a template to build the image the traditional way using the openSUSE Tumbleweed base container. The result is much bigger than with busybox.
+
 ## Reporting bugs
 
 Please report bugs as [github issue](https://github.com/thkukuk/firewalld-container/issues)
