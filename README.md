@@ -4,8 +4,8 @@ Firewall daemon (firewalld) container image with nftables as backend
 
 ## Run a firewalld instance
 
-The firewalld container needs access to the host network and needs to run as
-privileged container.
+The firewalld container needs access to the host network and needs to run as privileged container.
+The container image uses it's own dbus instance. This means, that other applications on the Host OS like NetworkManager, wicked, podman and similar cannot manager the firewall rules.
 
 To start the container:
 
