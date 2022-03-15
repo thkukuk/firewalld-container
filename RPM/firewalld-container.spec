@@ -1,5 +1,5 @@
 #
-# spec file for package container-registry-systemd
+# spec file for package firewalld-container
 #
 # Copyright (c) 2022 SUSE LLC
 #
@@ -17,12 +17,12 @@
 
 
 Name:           firewalld-container
-Version:        0.0+git20220131.00931d2
+Version:        20220315.1ca5159
 Release:        0
 Summary:        Supporting files for running firewalld in a container
 License:        MIT, GPL-2.0-or-later
 URL:            https://github.com/thkukuk/firewalld-container
-Source:         firewalld-container-%{version}.tar.xz
+Source:         firewalld-container-%{version}.tar.gz
 BuildRequires:  firewalld
 Conflicts:      firewalld
 BuildArch:      noarch
@@ -40,17 +40,17 @@ PolicyKit.
 %install
 mkdir -p %{buildroot}%{_distconfdir}/default
 mkdir -p %{buildroot}%{_unitdir}
-mkdir -p %{buildroot}/usr/share/dbus-1/system.d
-mkdir -p %{buildroot}/usr/share/polkit-1/actions
+mkdir -p %{buildroot}%{_datadir}/dbus-1/system.d
+mkdir -p %{buildroot}%{_datadir}/polkit-1/actions
 mkdir -p %{buildroot}/srv/firewalld
 
 # Copy dbus and PolicyKit files from firewalld
-cp -av /usr/share/dbus-1/system.d/FirewallD.conf %{buildroot}/usr/share/dbus-1/system.d/
-cp -av /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.* %{buildroot}/usr/share/polkit-1/actions
+cp -av %{_datadir}/dbus-1/system.d/FirewallD.conf %{buildroot}%{_datadir}/dbus-1/system.d/
+cp -av %{_datadir}/polkit-1/actions/org.fedoraproject.FirewallD1.* %{buildroot}%{_datadir}/polkit-1/actions
 
-install -m 644 container-firewalld.default %{buildroot}%{_distconfdir}/default/container-firewalld
-install -m 644 container-firewalld.service %{buildroot}%{_unitdir}/
-install -m 644 container-firewalld-dbus.service %{buildroot}%{_unitdir}/
+install -m 644 RPM/container-firewalld.default %{buildroot}%{_distconfdir}/default/container-firewalld
+install -m 644 RPM/container-firewalld.service %{buildroot}%{_unitdir}/
+install -m 644 RPM/container-firewalld-dbus.service %{buildroot}%{_unitdir}/
 
 %pre
 %service_add_pre container-firewalld.service container-firewalld-dbus.service
@@ -70,8 +70,8 @@ install -m 644 container-firewalld-dbus.service %{buildroot}%{_unitdir}/
 %{_distconfdir}/default/container-firewalld
 %{_unitdir}/container-firewalld.service
 %{_unitdir}/container-firewalld-dbus.service
-/usr/share/dbus-1/system.d
-/usr/share/polkit-1/actions
+%{_datadir}/dbus-1/system.d
+%{_datadir}/polkit-1/actions
 %dir /srv/firewalld
 
 %changelog
