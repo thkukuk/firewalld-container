@@ -28,7 +28,7 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 # If no firewalld config is provided, use default one
-if [ ! "$(ls -A /tmp)" ]; then
+if [ ! "$(ls -A /etc/firewalld)" ]; then
     cp -av /usr/share/factory/etc/firewalld/* /etc/firewalld/
 fi
 
