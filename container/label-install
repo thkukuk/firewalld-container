@@ -41,3 +41,7 @@ if [ -e /host/usr/libexec/polkit-1/polkitd ] && \
     mkdir -p /host/etc/polkit-1/actions/
     cp -av /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy /host/etc/polkit-1/actions/
 fi
+
+if [ ! -f /host/usr/local/bin/firewall-cmd ]; then
+    cp -av /container/cmds/firewall-cmd /host/usr/local/bin
+fi

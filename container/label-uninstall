@@ -23,3 +23,8 @@ fi
 if [ -f /host/etc/systemd/system/firewalld.service ]; then
     rm -fv /host/etc/systemd/system/firewalld.service
 fi
+
+if [ -f /host/usr/local/bin/firewall-cmd ]; then
+    rm -fv /host/usr/local/bin/firewall-cmd
+fi
+

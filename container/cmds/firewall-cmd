@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if command -v podman &> /dev/null ; then
+    CLI=podman
+elif command -v docker &> /dev/null ; then
+    CLI=docker
+else
+    echo "$0: ERROR: neither 'podman' nor 'docker' are available. Exiting!"
+fi
+
+exec $CLI exec -it firewalld firewall-cmd "$@"
