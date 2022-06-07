@@ -54,5 +54,6 @@
     <package name="mandoc"/>
     <package name="-busybox-man"/>
     <package name="-busybox-diffutils"/>
+    <archive name="container.tar.gz"/>
   </packages>
 </image>
