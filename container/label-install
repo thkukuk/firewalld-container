@@ -21,10 +21,10 @@ fi
 if [ "${container:-}" = oci ]; then
     if [ ! -e /host/etc/systemd/system/firewalld.service ]; then
 	mkdir -p /host/etc/systemd/system/
-	cp -av /container/RPM/firewalld.service /host/etc/systemd/system/
-	if [ ! -e /host/etc/default ]; then
-	    mkdir -p /host/etc/systemd/system/
-	    cp -av /container/RPM/firewalld.service /host/etc/systemd/system/
+	cp -av /container/systemd/firewalld.service /host/etc/systemd/system/
+	if [ ! -e /host/etc/default/container-firewalld ]; then
+	    mkdir -p /host/etc/default
+	    cp -av /container/systemd/container-firewalld.service /host/etc/default/container-firewalld
 	fi
     fi
 fi
