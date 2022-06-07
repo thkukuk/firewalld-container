@@ -52,6 +52,9 @@
     <package name="bash"/>
     <package name="firewalld"/>
     <package name="mandoc"/>
+    <package name="ebtables"/>
+    <package name="iptables"/>
+    <package name="ipset"/>
     <package name="-busybox-man"/>
     <package name="-busybox-diffutils"/>
     <archive name="container.tar.gz"/>
