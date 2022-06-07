@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 DEBUG=${DEBUG:-"0"}
-NODBUS=${NODBUS:-"0"}
+DBUS=${DBUS:-"0"}
 FIREWALLD_ARGS=""
 
 if [ "${DEBUG}" = "1" ]; then
@@ -12,7 +12,7 @@ fi
 export PATH=/usr/sbin:/sbin:${PATH}
 
 start_dbus() {
-    if [ "${NODBUS}" = "0" ]; then
+    if [ "${DBUS}" = "1" ]; then
         mkdir -p /run/dbus
         /usr/bin/dbus-daemon --system --fork
     fi

@@ -24,7 +24,7 @@ By default changes to the default firewalld configuration are lost with a restar
 ### Environment variables:
 ```
   DEBUG=[0|1]    Enable debug mode.
-  NODBUS=[0|1]   Don't start own dbus daemon. Requires that a dbus socket is provided.
+  DBUS=[0|1]     Start own dbus daemon. If not a dbus socket needs to be provided.
 ```
 
 ## Manage firewalld instance

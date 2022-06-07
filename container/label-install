@@ -1,0 +1,43 @@
+#!/bin/sh -eu
+
+# This is the install script for firewalld when run in a privileged
+# container.
+#
+# The host file system must be mounted at /host
+
+cd /
+PATH="/usr/bin:/usr/sbin"
+
+if [ ! -d /host/etc ] || [ ! -d /host/proc ] || [ ! -d /host/run ]; then
+    echo "firewalld-install: host file system is not mounted at /host" >&2
+    exit 1
+fi
+if [ -f /host/usr/sbin/firewalld ]; then
+    echo "firewalld-install: firewalld must not be installed in the host" >&2
+    exit 1
+fi
+
+# For podman, cp a systemd unit for starting on boot
+if [ "${container:-}" = oci ]; then
+    if [ ! -e /host/etc/systemd/system/firewalld.service ]; then
+	mkdir -p /host/etc/systemd/system/
+	cp -av /container/RPM/firewalld.service /host/etc/systemd/system/
+	if [ ! -e /host/etc/default ]; then
+	    mkdir -p /host/etc/systemd/system/
+	    cp -av /container/RPM/firewalld.service /host/etc/systemd/system/
+	fi
+    fi
+fi
+
+if [ ! -e /host/usr/share/dbus-1/system.d/FirewallD.conf && \
+	 ! -e /host/etc/dbus-1/system.d/FirewallD.conf ]; then
+    mkdir -p /host/etc/dbus-1/system.d/
+    cp -av /usr/share/dbus-1/system.d/FirewallD.conf /host/etc/dbus-1/system.d/
+fi
+
+if [ -e /host/usr/libexec/polkit-1/polkitd && \
+	 ! -e /host/usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy && \
+	 ! -e /host/etc/polkit-1/actions/org.fedoraproject.FirewallD1.policy ]; then
+    mkdir -p /host/etc/polkit-1/actions/
+    cp -av /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy /host/etc/polkit-1/actions/
+fi
