@@ -22,6 +22,12 @@ start_dbus() {
 # Main
 #
 
+# shortcut for podman runlabel calls
+if [ $(basename "$1") = 'label-install' ] ||
+       [ $(basename "$1") = 'label-uninstall' ]; then
+    exec "$@"
+fi
+
 # if command starts with an option, prepend firewalld
 if [ "${1:0:1}" = '-' ]; then
      set -- firewalld --nofork "$@"

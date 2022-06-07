@@ -9,11 +9,17 @@ cd /
 PATH="/usr/bin:/usr/sbin"
 
 if [ ! -d /host/etc ] || [ ! -d /host/proc ] || [ ! -d /host/run ]; then
-    echo "firewalld-install: host file system is not mounted at /host" >&2
+    echo "firewalld-uninstall: host file system is not mounted at /host" >&2
     exit 1
 fi
 
 # Everything else is settings and should remain
-rm -f /host/etc/dbus-1/system.d/FirewallD.conf
-rm -f /host/etc/polkit-1/actions/org.fedoraproject.FirewallD1.policy
-rm -f /host/etc/systemd/system/firewalld.service
+if [ -f /host/etc/dbus-1/system.d/FirewallD.conf ]; then
+    rm -fv /host/etc/dbus-1/system.d/FirewallD.conf
+fi
+if [ -f /host/etc/polkit-1/actions/org.fedoraproject.FirewallD1.policy ]; then
+    rm -fv /host/etc/polkit-1/actions/org.fedoraproject.FirewallD1.policy
+fi
+if [ -f /host/etc/systemd/system/firewalld.service ]; then
+    rm -fv /host/etc/systemd/system/firewalld.service
+fi
