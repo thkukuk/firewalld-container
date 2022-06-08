@@ -112,7 +112,7 @@ or for the `firewall-cmd` client:
 There are two ways to build a firewalld container:
 
 * [firewalld-image.kiwi](firewalld-image.kiwi) is a template for [kiwi](https://github.com/OSInside/kiwi) using the openSUSE busybox container as base container.
-* [Dockerfile](Dockerfile) is a template to build the image the traditional way using the openSUSE Tumbleweed base container. The result is much bigger than with busybox.
+* [Dockerfile](Dockerfile) is a template to build the image the traditional way using the openSUSE Tumbleweed base container. The result is much bigger than with busybox and the Dockerfile does not really work yet.
 
 ## Reporting bugs
 
