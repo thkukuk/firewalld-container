@@ -21,10 +21,10 @@ fi
 if [ "${container:-}" = oci ]; then
     if [ ! -e /host/etc/systemd/system/firewalld.service ]; then
 	mkdir -p /host/etc/systemd/system/
-	cp -av /container/systemd/firewalld.service /host/etc/systemd/system/
+	cp -pv /container/systemd/firewalld.service /host/etc/systemd/system/
 	if [ ! -e /host/etc/default/container-firewalld ]; then
 	    mkdir -p /host/etc/default
-	    cp -av /container/systemd/container-firewalld.default /host/etc/default/container-firewalld
+	    cp -pv /container/systemd/container-firewalld.default /host/etc/default/container-firewalld
 	fi
     fi
 fi
@@ -32,7 +32,7 @@ fi
 if [ ! -e /host/usr/share/dbus-1/system.d/FirewallD.conf ] && \
 	 [ ! -e /host/etc/dbus-1/system.d/FirewallD.conf ]; then
     mkdir -p /host/etc/dbus-1/system.d/
-    cp -av /usr/share/dbus-1/system.d/FirewallD.conf /host/etc/dbus-1/system.d/
+    cp -pv /usr/share/dbus-1/system.d/FirewallD.conf /host/etc/dbus-1/system.d/
 fi
 
 if [ -e /host/usr/libexec/polkit-1/polkitd ] || \
@@ -40,7 +40,7 @@ if [ -e /host/usr/libexec/polkit-1/polkitd ] || \
     if [ ! -e /host/usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy ] && \
 	[ ! -e /host/etc/polkit-1/actions/org.fedoraproject.FirewallD1.policy ]; then
             mkdir -p /host/etc/polkit-1/actions/
-            cp -av /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy /host/etc/polkit-1/actions/
+            cp -pv /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy /host/etc/polkit-1/actions/
     fi
 fi
 
@@ -50,5 +50,5 @@ if [ ! -e /host/etc/firewalld ]; then
 fi
 
 if [ ! -f /host/usr/local/bin/firewall-cmd ]; then
-    cp -av /container/cmds/firewall-cmd /host/usr/local/bin
+    cp -pv /container/cmds/firewall-cmd /host/usr/local/bin
 fi
