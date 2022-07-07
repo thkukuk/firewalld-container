@@ -6,9 +6,9 @@
 FROM opensuse/tumbleweed
 LABEL maintainer="Thorsten Kukuk <kukuk@thkukuk.de>"
 
-LABEL INSTALL="/usr/bin/docker run --env container=oci --rm --privileged -v /:/host ${IMAGE} /container/label-install"
-LABEL UNINSTALL="UNINSTALL" value="/usr/bin/docker run --rm --privileged -v /:/host ${IMAGE} /container/label-uninstall"
-LABEL RUN="/usr/bin/docker run -d --name ${NAME} --privileged --net=host -v /etc/firewalld:/etc/firewalld -e DBUS=0 -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket ${IMAGE} /usr/sbin/firewalld --nofork"
+LABEL INSTALL="/usr/bin/docker run --env container=oci --rm --privileged -v /:/host \${IMAGE} /container/label-install"
+LABEL UNINSTALL="UNINSTALL" value="/usr/bin/docker run --rm --privileged -v /:/host \${IMAGE} /container/label-uninstall"
+LABEL RUN="/usr/bin/docker run -d --rm --name \${NAME} --privileged --net=host -v /etc/firewalld:/etc/firewalld -e DBUS=0 -v /run/dbus/system_bus_socket:/run/dbus/system_bus_socket \${IMAGE} /usr/sbin/firewalld --nofork"
 # Define labels according to https://en.opensuse.org/Building_derived_containers
 # labelprefix=de.thkukuk.firewalld
 LABEL org.opencontainers.image.title="A firewall daemon with D-Bus interface providing a dynamic firewall"
