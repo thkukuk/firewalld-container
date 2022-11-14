@@ -12,9 +12,10 @@ Optional you can use the dbus daemon provided by the container image. But this
 means that other applications on the Host OS like NetworkManager, wicked,
 podman and similar cannot manage the firewall rules.
 
-The container image provides three runlabels:
+The container image provides four runlabels:
 
 * INSTALL: installs the dbus and polkit files, a firewall-cmd wrapper and a systemd service
+* UPDATE: updates the installed files if the ones from the container differs
 * UNINSTALL: removes the by `INSTALL` created files except for configuration files
 * RUN: starts the container. /etc/firewalld and the dbus socket will be mounted into the container
 

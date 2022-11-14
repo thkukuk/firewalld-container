@@ -1,0 +1,37 @@
+#!/bin/sh -eu
+
+# This is the update script for firewalld when run in a privileged
+# container.
+#
+# The host file system must be mounted at /host
+
+cd /
+PATH="/usr/bin:/usr/sbin"
+
+if [ ! -d /host/etc ] || [ ! -d /host/proc ] || [ ! -d /host/run ]; then
+    echo "firewalld-update: host file system is not mounted at /host" >&2
+    exit 1
+fi
+
+if cmp -s /container/systemd/firewalld.service /host/etc/systemd/system/firewalld.service ; then
+    echo "Updating firewalld.service..."
+    cp -pv /container/systemd/firewalld.service /host/etc/systemd/system/
+fi
+
+if cmp -s /host/etc/dbus-1/system.d/FirewallD.conf /usr/share/dbus-1/system.d/FirewallD.conf; then
+    echo "Updating FirewallD.conf..."
+    cp -pv /usr/share/dbus-1/system.d/FirewallD.conf /host/etc/dbus-1/system.d/
+fi
+
+if [ -e /host/usr/libexec/polkit-1/polkitd ] || \
+       [ -e /host/usr/lib/polkit-1/polkitd ]; then
+    if cmp -s /host/etc/polkit-1/actions/org.fedoraproject.FirewallD1.policy /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy; then
+	echo "Updating FirewallD1.policy..."
+        cp -pv /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy /host/etc/polkit-1/actions/
+    fi
+fi
+
+if cmp -s /host/usr/local/bin/firewall-cmd /container/cmds/firewall-cmd; then
+    echo "Updating firewall-cmd..."
+    cp -pv /container/cmds/firewall-cmd /host/usr/local/bin
+fi

@@ -40,11 +40,8 @@ if [ -e /host/usr/libexec/polkit-1/polkitd ] || \
     if [ ! -e /host/usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy ] && \
 	   [ ! -e /host/etc/polkit-1/actions/org.fedoraproject.FirewallD1.policy ]; then
 
-	if [ -d /host/etc/polkit-1/actions ]; then
-            cp -pv /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy /host/etc/polkit-1/actions/
-	else
-            cp -pv /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy /host/usr/share/polkit-1/actions/ || echo "Cannot copy firewalld policy"
-	fi
+	mkdir -p /host/etc/polkit-1/actions
+        cp -pv /usr/share/polkit-1/actions/org.fedoraproject.FirewallD1.policy /host/etc/polkit-1/actions/
     fi
 fi
 
